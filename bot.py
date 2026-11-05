@@ -327,7 +327,8 @@ async def cb_as_answer(c: CallbackQuery) -> None:
     name = c.from_user.first_name or ""
     caption = f"<b>{level['title']}</b>\n\n{level['text']}"
     try:
-        png = card.make_result_card(name, st["score"], max_score, level["short"], level["color"])
+        png = await asyncio.to_thread(card.make_result_card, name, st["score"], max_score,
+                                     level["short"], level["color"])
         await c.message.answer_photo(BufferedInputFile(png, filename="result.jpg"), caption=caption)
     except Exception:
         logging.exception("Не удалось сделать карточку")
