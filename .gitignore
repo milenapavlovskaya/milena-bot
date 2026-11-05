@@ -1,0 +1,6 @@
+.venv/
+.env
+results.db
+__pycache__/
+bot.log
+*.pyc
